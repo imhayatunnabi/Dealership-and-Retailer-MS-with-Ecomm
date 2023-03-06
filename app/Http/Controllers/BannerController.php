@@ -13,31 +13,32 @@ class BannerController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): Response
+    public function index()
     {
-        //
+        $banners = Banner::all();
+        return view('backend.pages.banner.index',compact('banners'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create(): Response
+    public function create()
     {
-        //
+        return view('backend.pages.banner.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreBannerRequest $request): RedirectResponse
+    public function store(StoreBannerRequest $request)
     {
-        //
+
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Banner $banner): Response
+    public function show($id)
     {
         //
     }
@@ -45,24 +46,26 @@ class BannerController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Banner $banner): Response
+    public function edit($id)
     {
-        //
+        $banner = Banner::find($id);
+        return view('backend.pages.banner.edit',compact('banner'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateBannerRequest $request, Banner $banner): RedirectResponse
+    public function update(UpdateBannerRequest $request, $id)
     {
-        //
+        $banner = Banner::find($id);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Banner $banner): RedirectResponse
+    public function destroy($id)
     {
-        //
+        $banner = Banner::find($id)->delete();
+        // return to_route();
     }
 }

@@ -17,7 +17,6 @@ return new class extends Migration
             $table->foreignId('product_id')->constrained('products')->nullable();
             $table->double('quantity');
             $table->double('approved_quantity');
-            $table->double('approved_subtotal');
             $table->foreignId('approved_by');
             $table->double('unit_price');
             $table->double('subtotal');
