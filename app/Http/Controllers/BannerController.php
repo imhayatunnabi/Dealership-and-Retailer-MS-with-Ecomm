@@ -38,10 +38,10 @@ class BannerController extends Controller
      */
     public function store(StoreBannerRequest $request)
     {
-        $slug = Str::slug($request->name,'-');
+        $slug = Str::slug($request->heading);
         $count = Banner::where('slug', $slug)->count();
         if($count){
-            $slug = $slug . '-' . ($count + 1);
+            $slug = $slug.'_'.$count + 1;
         }
         $image = null;
         if($request->hasFile('image')){
