@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('banner_url');
             $table->string('button_text');
             $table->string('image');
+            $table->string('slug')->unique();
             $table->boolean('status')->default(0);
             $table->timestamps();
         });

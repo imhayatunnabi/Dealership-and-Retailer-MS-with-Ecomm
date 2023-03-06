@@ -22,7 +22,10 @@ class StoreBannerRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'=>'required|max:255',
+            'heading'=>'required|max:255',
+            'description'=>'required|max:255',
+            'banner_url'=>'required|max:255|url',
+            'button_text'=>'required|max:255',
             'image'=>'required|image',
             'status'=>'required|numeric',
         ];

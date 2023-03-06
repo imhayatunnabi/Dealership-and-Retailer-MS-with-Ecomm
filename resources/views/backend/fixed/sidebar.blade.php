@@ -31,6 +31,12 @@
                         Settings </a>
                 </li>
                 @endpermission
+                @permission('backend.banner.index')
+                <li>
+                    <a href="{{ route('backend.banner.index') }}"><i class="fa-solid fa-gear"></i></i>
+                        Banner </a>
+                </li>
+                @endpermission
             </ul>
         </div>
     </div>

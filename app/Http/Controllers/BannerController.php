@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Banner;
 use Illuminate\Support\Str;
-use Illuminate\Http\Response;
-use App\Repository\BannerRepository;
-use Illuminate\Http\RedirectResponse;
+use App\Http\Repository\BannerRepository;
 use App\Http\Requests\StoreBannerRequest;
 use App\Http\Requests\UpdateBannerRequest;
 
@@ -51,12 +49,17 @@ class BannerController extends Controller
             $request->file('image')->storeAs('/banner', $image);
         }
         $data = [
-            'name'=> $request->name,
+            'heading'=> $request->heading,
+            'description'=> $request->description,
+            'banner_url'=> $request->banner_url,
+            'button_text'=> $request->button_text,
             'slug'=> $slug,
             'status'=> $request->status,
             'image'=> $image,
         ];
         $this->bannerRepository->create($data);
+        alert()->success('Banner created successfully');
+        return to_route('backend.banner.index');
     }
 
     /**
@@ -93,7 +96,10 @@ class BannerController extends Controller
             $request->file('image')->storeAs('/banner', $image);
         }
         $data = [
-            'name'=> $request->name,
+            'heading'=> $request->heading,
+            'description'=> $request->description,
+            'banner_url'=> $request->banner_url,
+            'button_text'=> $request->button_text,
             'slug'=> $slug,
             'status'=> $request->status,
             'image'=> $image,

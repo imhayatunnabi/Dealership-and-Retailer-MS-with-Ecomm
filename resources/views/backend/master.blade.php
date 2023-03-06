@@ -111,6 +111,7 @@
         $(document).ready(function() {
             $('#pagination').DataTable();
             $('#datatables').DataTable();
+            $('.table').DataTable();
         });
     </script>
     @include('sweetalert::alert')

@@ -45,7 +45,7 @@ Route::name('backend.')->middleware('auth')->group(function(){
         Route::get('/destroy/{id}', [ACMController::class, 'delete'])->name('destroy');
     });
     Route::prefix('banner')->name('banner.')->group(function(){
-        Route::get('', [BannerController::class, 'index'])->name('index');
+        Route::get('/', [BannerController::class, 'index'])->name('index');
         Route::get('/create', [BannerController::class, 'create'])->name('create');
         Route::post('/store', [BannerController::class, 'store'])->name('store');
         Route::get('/edit/{id}', [BannerController::class, 'edit'])->name('edit');
