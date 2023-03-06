@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateBannerRequest extends FormRequest
@@ -11,7 +12,7 @@ class UpdateBannerRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +22,12 @@ class UpdateBannerRequest extends FormRequest
      */
     public function rules(): array
     {
+        $banner = $this->route('banner')->id;
         return [
-            //
+            'name'=>'required|max:255',
+            'image'=>'required|image',
+            'status'=>'required|numeric',
+            'slug'=>Rule::unique('banners')->ignore($banner),
         ];
     }
 }

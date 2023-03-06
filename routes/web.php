@@ -5,6 +5,7 @@ use App\Http\Controllers\backend\ACMController;
 use App\Http\Controllers\backend\BackendController;
 use App\Http\Controllers\backend\SettingsController;
 use App\Http\Controllers\backend\UserController;
+use App\Http\Controllers\BannerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,7 +28,29 @@ Route::name('backend.')->middleware('auth')->group(function(){
         Route::get('/',[SettingsController::class,'index'])->name('index');
         Route::put('/update',[SettingsController::class,'update'])->name('update');
     });
-    Route::resource('user',UserController::class);
-    Route::resource('role-permission',ACMController::class);
+    Route::prefix('user')->name('user.')->group(function () {
+        Route::get('/', [UserController::class, 'index'])->name('index');
+        Route::get('/create', [UserController::class, 'create'])->name('create');
+        Route::post('/store', [UserController::class, 'store'])->name('store');
+        Route::get('/edit/{id}', [UserController::class, 'edit'])->name('edit');
+        Route::put('/update/{id}', [UserController::class, 'update'])->name('update');
+        Route::get('/destroy/{id}', [UserController::class, 'destroy'])->name('destroy');
+    });
+    Route::prefix('role-permission')->name('role-permission.')->group(function () {
+        Route::get('/', [ACMController::class, 'index'])->name('index');
+        Route::get('/create', [ACMController::class, 'create'])->name('create');
+        Route::post('/store', [ACMController::class, 'store'])->name('store');
+        Route::get('/edit/{id}', [ACMController::class, 'edit'])->name('edit');
+        Route::post('/update/{id}', [ACMController::class, 'update'])->name('update');
+        Route::get('/destroy/{id}', [ACMController::class, 'delete'])->name('destroy');
+    });
+    Route::prefix('banner')->name('banner.')->group(function(){
+        Route::get('', [BannerController::class, 'index'])->name('index');
+        Route::get('/create', [BannerController::class, 'create'])->name('create');
+        Route::post('/store', [BannerController::class, 'store'])->name('store');
+        Route::get('/edit/{id}', [BannerController::class, 'edit'])->name('edit');
+        Route::post('/update/{id}', [BannerController::class, 'update'])->name('update');
+        Route::get('/destroy/{id}', [BannerController::class, 'delete'])->name('destroy');
+    });
 
 });
