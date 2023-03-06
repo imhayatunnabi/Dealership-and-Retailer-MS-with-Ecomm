@@ -39,14 +39,15 @@ class BannerController extends Controller
     public function store(StoreBannerRequest $request)
     {
         $slug = Str::slug($request->heading);
+        $randomText =Str::random(4);
         $count = Banner::where('slug', $slug)->count();
-        if($count){
-            $slug = $slug.'_'.$count + 1;
+        if($count>=1){
+            $slug = $slug.'-'.$randomText;
         }
         $image = null;
         if($request->hasFile('image')){
             $image = date('Ymdhsis').'.'.$request->file('image')->getClientOriginalExtension();
-            $request->file('image')->storeAs('/banner', $image);
+            $request->file('image')->storeAs('/uploads/banner', $image);
         }
         $data = [
             'heading'=> $request->heading,
@@ -93,7 +94,7 @@ class BannerController extends Controller
         $image = $banner->image;
         if($request->hasFile('image')){
             $image = date('Ymdhsis').'.'.$request->file('image')->getClientOriginalExtension();
-            $request->file('image')->storeAs('/banner', $image);
+            $request->file('image')->storeAs('/uploads/banner', $image);
         }
         $data = [
             'heading'=> $request->heading,
